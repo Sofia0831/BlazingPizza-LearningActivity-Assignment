@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlazingPizza
 {
@@ -26,7 +29,8 @@ namespace BlazingPizza
 
         public decimal GetBasePrice()
         {
-            return ((decimal)Size / (decimal)DefaultSize) * Special.BasePrice;
+            decimal basePriceInPounds = ((decimal)Size/(decimal)DefaultSize * Special.BasePrice);
+            return basePriceInPounds * ConversionRate;
         }
 
         public decimal GetTotalPrice()
@@ -38,5 +42,7 @@ namespace BlazingPizza
         {
             return GetTotalPrice().ToString("0.00");
         }
+
+        public const decimal ConversionRate = 69m;
     }
 }
